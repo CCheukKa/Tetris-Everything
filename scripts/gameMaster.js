@@ -81,7 +81,7 @@ function hardDrop() {
 // Gravity
 
 function gravity() {
-    if (allowFall()) {
+    if (allowFall(activeMino)) {
         activeMino.centerY++;
         window.dispatchEvent(event_updateActiveMino);
         return true;
@@ -91,15 +91,14 @@ function gravity() {
 }
 
 function lock() {
-    console.log(`Locking mino`);
+    // console.log(`Locking mino`);
     activeMino.blockList.forEach(block => {
         board.state[block.y][block.x] = activeMino.type;
     });
     activeMino.regenerate(spawn.x, spawn.y);
     let linesCleared = lineClear();
     if (linesCleared) {
-        console.log(timestampLog(`Line clear`));
-
+        // console.log(timestampLog(`Line clear`));
         window.dispatchEvent(new CustomEvent('lineClear', { detail: linesCleared }));
     }
     window.dispatchEvent(event_updateActiveMino);

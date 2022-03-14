@@ -1,5 +1,5 @@
 :root {
-    --boardColour: #00000070;
+    --boardColour: #00000050;
     --gridLineColour: #ffffff10;
     --ZColour: #e06363;
     --LColour: #e0a563;
@@ -50,6 +50,11 @@ body {
 .mino.active {
     outline: #ffffffb0 solid 0.6vmin;
     outline-offset: -1.4vmin;
+}
+
+.mino.active.ghost {
+    opacity: 50%;
+    mix-blend-mode: hard-light;
 }
 
 .mino.Z {

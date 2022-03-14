@@ -22,7 +22,6 @@ class ActiveMino {
         this.blockList = [];
         this.redefineBlocks();
         //
-        window.dispatchEvent(new Event('activeMinoChange'));
         return true;
     }
 
@@ -274,9 +273,9 @@ function changeGravity(level) {
     }
 }
 
-function allowFall() {
+function allowFall(mino) {
     let canDrop = true;
-    activeMino.blockList.forEach(block => {
+    mino.blockList.forEach(block => {
         if (board.state[block.y + 1][block.x] != 0) {
             canDrop = false;
             return;

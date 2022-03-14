@@ -45,5 +45,22 @@ function redrawActive() {
     activeMino.blockList.forEach(block => {
         drawRectPercent(mainBoard.activeGroup, 10 * block.x, 5 * block.y, 10, 5, `mino ${minoName[activeMino.type]} active`, '', cornerRadius, cornerRadius);
     });
+    redrawGhost();
     refresh(mainBoard.activeGroup);
+}
+
+function redrawGhost() {
+    ghostMino = new ActiveMino(activeMino.centerX, activeMino.centerY, activeMino.type, activeMino.rotation);
+
+    while (true) {
+        if (!allowFall(ghostMino)) { break; };
+        ghostMino.centerY++;
+        ghostMino.redefineBlocks();
+    }
+
+    ghostMino.blockList.forEach(block => {
+        drawRectPercent(mainBoard.activeGroup, 10 * block.x, 5 * block.y, 10, 5, `mino ${minoName[activeMino.type]} active ghost`, '', cornerRadius, cornerRadius);
+    });
+    delete ghostMino;
+    return true;
 }
