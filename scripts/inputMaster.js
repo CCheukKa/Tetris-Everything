@@ -57,7 +57,7 @@ function absoluteKeyup(e) {
 }
 
 function input(e) {
-    // console.log(e.detail);
+    console.log(e.detail);
     switch (e.detail.keyCode) {
         case 101: // clockwise
             rotate(0);
@@ -83,6 +83,10 @@ function input(e) {
 
         case 32: // hard drop
             hardDrop();
+            break;
+
+        case 16: // hold
+            hold();
             break;
 
         default:

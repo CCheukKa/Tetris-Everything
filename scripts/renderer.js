@@ -9,6 +9,7 @@ const cornerRadius = 3;
 window.addEventListener('boardChange', () => { redrawGrid(); })
 window.addEventListener('minoChange', () => {
     redrawMinos();
+    redrawHoldQueue();
     redrawNextQueue();
 })
 window.addEventListener('activeMinoChange', () => {
@@ -120,4 +121,42 @@ function redrawNextQueue() {
 
     //
     refresh(nextBoard);
+}
+
+heldType = 0;
+
+function redrawHoldQueue() {
+    holdBoard.innerHTML = '';
+    let offset = new Coordinate(0, 0);
+    switch (heldType) {
+        case 1: //Z
+            offset = new Coordinate(0, 0.5);
+            break;
+        case 2: //L
+            offset = new Coordinate(0, 0.5);
+            break;
+        case 3: //O
+            offset = new Coordinate(-0.5, 0.5);
+            break;
+        case 4: //S
+            offset = new Coordinate(0, 0.5);
+            break;
+        case 5: //I
+            offset = new Coordinate(-0.5, 0);
+            break;
+        case 6: //J
+            offset = new Coordinate(0, 0.5);
+            break;
+        case 7: //T
+            offset = new Coordinate(0, 0.5);
+            break;
+        default:
+            return false;
+    }
+    let holdMino = new Mino(offset.x, offset.y, heldType, 0);
+    holdMino.blockList.forEach(block => {
+        drawRectPercent(holdBoard, block.x * 20 + 40, block.y * 100 / 3 + 100 / 3, 20, 100 / 3, `mino ${minoName[heldType]} ${alreadyHeldThisRound ? 'inactive':null}`, '', cornerRadius, cornerRadius);
+    });
+
+    refresh(holdBoard);
 }

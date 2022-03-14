@@ -34,8 +34,11 @@ var linesClearedTotal = 0;
 var isSoftDropping = false;
 
 var nextQueue = [];
+var heldType = 0;
 var minoCount = 0;
 var activeMino = new Mino(spawn.x, spawn.y, getNextMino(minoCount));
+
+var alreadyHeldThisRound = false;
 
 changeGravity(level);
 window.addEventListener('lineClear', (e) => {
@@ -101,7 +104,29 @@ function lock() {
         // console.log(timestampLog(`Line clear`));
         window.dispatchEvent(new CustomEvent('lineClear', { detail: linesCleared }));
     }
+    alreadyHeldThisRound = false;
     window.dispatchEvent(event_updateActiveMino);
     window.dispatchEvent(event_minoChange);
     return false;
+}
+
+// Hold
+
+function hold() {
+    if (alreadyHeldThisRound) { return false; }
+    delete activeMino;
+    if (heldType) {
+        let buffer = heldType;
+        heldType = activeMino.type;
+        activeMino = new Mino(spawn.x, spawn.y, buffer, 0);
+    } else {
+        heldType = activeMino.type;
+        activeMino.regenerate(spawn.x, spawn.y);
+    }
+
+    alreadyHeldThisRound = true;
+    window.dispatchEvent(event_updateActiveMino);
+    window.dispatchEvent(event_minoChange);
+
+    changeGravity(level);
 }

@@ -52,6 +52,10 @@ body {
     outline-offset: -1.4vmin;
 }
 
+.mino.inactive {
+    filter: grayscale();
+}
+
 .mino.active.ghost {
     opacity: 50%;
     mix-blend-mode: hard-light;
