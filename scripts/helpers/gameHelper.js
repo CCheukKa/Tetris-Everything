@@ -39,21 +39,21 @@ class ActiveMino {
                         break;
                     case 1:
                         this.blockList.push(new Coordinate(this.centerX + 1, this.centerY - 1));
-                        this.blockList.push(new Coordinate(this.centerX + 1, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX + 1, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
                         break;
                     case 2:
-                        this.blockList.push(new Coordinate(this.centerX + 1, this.centerY + 1));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
+                        this.blockList.push(new Coordinate(this.centerX + 1, this.centerY + 1));
                         break;
                     case 3:
-                        this.blockList.push(new Coordinate(this.centerX - 1, this.centerY + 1));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY - 1));
                         this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX, this.centerY));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY - 1));
+                        this.blockList.push(new Coordinate(this.centerX - 1, this.centerY + 1));
                         break;
                     default:
                         return false;
@@ -64,28 +64,28 @@ class ActiveMino {
             case 2: //L
                 switch (this.rotation) {
                     case 0:
+                        this.blockList.push(new Coordinate(this.centerX + 1, this.centerY - 1));
                         this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX + 1, this.centerY));
-                        this.blockList.push(new Coordinate(this.centerX + 1, this.centerY - 1));
                         break;
                     case 1:
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY - 1));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
                         this.blockList.push(new Coordinate(this.centerX + 1, this.centerY + 1));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY - 1));
                         break;
                     case 2:
-                        this.blockList.push(new Coordinate(this.centerX + 1, this.centerY));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
-                        this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX - 1, this.centerY + 1));
+                        this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX + 1, this.centerY));
                         break;
                     case 3:
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY - 1));
                         this.blockList.push(new Coordinate(this.centerX - 1, this.centerY - 1));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY - 1));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
                         break;
                     default:
                         return false;
@@ -102,10 +102,10 @@ class ActiveMino {
             case 4: //S
                 switch (this.rotation) {
                     case 0:
-                        this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX, this.centerY - 1));
                         this.blockList.push(new Coordinate(this.centerX + 1, this.centerY - 1));
+                        this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
                         break;
                     case 1:
                         this.blockList.push(new Coordinate(this.centerX, this.centerY - 1));
@@ -114,16 +114,16 @@ class ActiveMino {
                         this.blockList.push(new Coordinate(this.centerX + 1, this.centerY + 1));
                         break;
                     case 2:
-                        this.blockList.push(new Coordinate(this.centerX + 1, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX, this.centerY));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
+                        this.blockList.push(new Coordinate(this.centerX + 1, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX - 1, this.centerY + 1));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
                         break;
                     case 3:
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
-                        this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX - 1, this.centerY - 1));
+                        this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
                         break;
                     default:
                         return false;
@@ -177,15 +177,15 @@ class ActiveMino {
                         break;
                     case 2:
                         this.blockList.push(new Coordinate(this.centerX + 1, this.centerY + 1));
-                        this.blockList.push(new Coordinate(this.centerX + 1, this.centerY));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX + 1, this.centerY));
                         break;
                     case 3:
                         this.blockList.push(new Coordinate(this.centerX - 1, this.centerY + 1));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX, this.centerY - 1));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
                         break;
                     default:
                         return false;
@@ -195,28 +195,28 @@ class ActiveMino {
             case 7: //T
                 switch (this.rotation) {
                     case 0:
-                        this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX, this.centerY - 1));
-                        this.blockList.push(new Coordinate(this.centerX + 1, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX + 1, this.centerY));
                         break;
                     case 1:
                         this.blockList.push(new Coordinate(this.centerX, this.centerY - 1));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX + 1, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
                         break;
                     case 2:
+                        this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX + 1, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
-                        this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY));
                         break;
                     case 3:
-                        this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
-                        this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX, this.centerY - 1));
+                        this.blockList.push(new Coordinate(this.centerX - 1, this.centerY));
                         this.blockList.push(new Coordinate(this.centerX, this.centerY));
+                        this.blockList.push(new Coordinate(this.centerX, this.centerY + 1));
                         break;
                     default:
                         return false;
