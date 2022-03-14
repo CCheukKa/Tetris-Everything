@@ -1,13 +1,13 @@
 function SRS(direction) {
     //! Temporary
     if (direction == 0) {
-        return new ActiveMino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 1) % 4);
+        return new Mino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 1) % 4);
     }
     if (direction == 1) {
-        return new ActiveMino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 3) % 4);
+        return new Mino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 3) % 4);
     }
     if (direction == 2) {
-        return new ActiveMino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 2) % 4);
+        return new Mino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 2) % 4);
     }
     //
     switch (activeMino.type) {
@@ -32,12 +32,12 @@ function SRS(direction) {
 
 function rotateZ(direction) {
     if (direction == 0) {
-        return new ActiveMino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 1) % 4);
+        return new Mino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 1) % 4);
     }
     if (direction == 1) {
-        return new ActiveMino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 3) % 4);
+        return new Mino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 3) % 4);
     }
     if (direction == 2) {
-        return new ActiveMino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 2) % 4);
+        return new Mino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 2) % 4);
     }
 }

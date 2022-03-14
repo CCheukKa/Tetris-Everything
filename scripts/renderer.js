@@ -7,9 +7,14 @@ window.addEventListener('load', () => {
 const cornerRadius = 3;
 
 window.addEventListener('boardChange', () => { redrawGrid(); })
-window.addEventListener('minoChange', () => { redrawMinos(); })
+window.addEventListener('minoChange', () => {
+    redrawMinos();
+    redrawNextQueue();
+})
 window.addEventListener('activeMinoChange', () => {
-    if (activeMino) { redrawActive(); }
+    if (activeMino) {
+        redrawActive();
+    }
 });
 
 
@@ -50,7 +55,7 @@ function redrawActive() {
 }
 
 function redrawGhost() {
-    ghostMino = new ActiveMino(activeMino.centerX, activeMino.centerY, activeMino.type, activeMino.rotation);
+    ghostMino = new Mino(activeMino.centerX, activeMino.centerY, activeMino.type, activeMino.rotation);
 
     while (true) {
         if (!allowFall(ghostMino)) { break; };
@@ -63,4 +68,56 @@ function redrawGhost() {
     });
     delete ghostMino;
     return true;
+}
+
+function redrawNextQueue() {
+    nextBoard.innerHTML = '';
+    let nextMinos = [];
+    drawLinePercent(nextBoard, 50, 0, 50, 100, 'gridline');
+    for (let y = 1; y < 6; y++) {
+        drawLinePercent(nextBoard, 0, y * 100 / 6, 100, y * 100 / 6, 'gridline');
+    }
+
+    for (let i = 0; i < nextQueuePeekCount; i++) {
+        let type = nextQueue[minoCount + i];
+        let offset = new Coordinate(0, 0);
+        switch (type) {
+            case 1: //Z
+                offset = new Coordinate(0, 0.5);
+                break;
+            case 2: //L
+                offset = new Coordinate(0, 0.5);
+                break;
+            case 3: //O
+                offset = new Coordinate(-0.5, 0.5);
+                break;
+            case 4: //S
+                offset = new Coordinate(0, 0.5);
+                break;
+            case 5: //I
+                offset = new Coordinate(-0.5, 0);
+                break;
+            case 6: //J
+                offset = new Coordinate(0, 0.5);
+                break;
+            case 7: //T
+                offset = new Coordinate(0, 0.5);
+                break;
+            default:
+                return false;
+        }
+        nextMinos.push(new Mino(offset.x, offset.y, type, 0));
+    }
+
+    for (let i = 0; i < nextMinos.length; i++) {
+        const mino = nextMinos[i];
+
+        mino.blockList.forEach(block => {
+            drawRectPercent(nextBoard, 20 * block.x + 40, i * 100 / 6 + block.y * 100 / 16 + 1 * 100 / 6 - 50 / 16, 20, 100 / 16, `mino ${minoName[mino.type]}`, '', cornerRadius, cornerRadius);
+        });
+        delete mino;
+    }
+
+    //
+    refresh(nextBoard);
 }

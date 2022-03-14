@@ -12,9 +12,9 @@ gameContainer.style.width = `${containerSize}vmin`;
 gameContainer.style.height = `${containerSize}vmin`;
 
 const tileSize = 5;
-holdBoard.style.width = `${tileSize*4}%`;
-holdBoard.style.height = `${tileSize*2}%`;
+holdBoard.style.width = `${tileSize*5}%`;
+holdBoard.style.height = `${tileSize*3}%`;
 mainBoard.style.width = `${tileSize*10}%`;
 mainBoard.style.height = `${tileSize*20}%`;
-nextBoard.style.width = `${tileSize*4}%`;
-nextBoard.style.height = `${tileSize * 14}%`;
+nextBoard.style.width = `${tileSize*5}%`;
+nextBoard.style.height = `${tileSize * 16}%`;

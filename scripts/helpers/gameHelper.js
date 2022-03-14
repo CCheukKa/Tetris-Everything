@@ -13,7 +13,7 @@ class Coordinate {
     }
 }
 
-class ActiveMino {
+class Mino {
     constructor(centerX, centerY, type = getNextMino(minoCount), rotation = 0) {
         this.centerX = centerX;
         this.centerY = centerY;
@@ -229,13 +229,13 @@ class ActiveMino {
     }
 
     regenerate(centerX, centerY, type = getNextMino(minoCount), rotation = 0) {
-        activeMino = new ActiveMino(centerX, centerY, type, rotation);
+        activeMino = new Mino(centerX, centerY, type, rotation);
         delete this;
     }
 }
 
 function getNextMino(count) {
-    if (!nextQueue[count]) {
+    if (!nextQueue[count + nextQueuePeekCount]) {
         nextQueue = nextQueue.concat(shuffle([1, 2, 3, 4, 5, 6, 7]));
     }
     let result = nextQueue[minoCount];

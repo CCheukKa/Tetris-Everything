@@ -35,7 +35,7 @@ var isSoftDropping = false;
 
 var nextQueue = [];
 var minoCount = 0;
-var activeMino = new ActiveMino(spawn.x, spawn.y, getNextMino(minoCount));
+var activeMino = new Mino(spawn.x, spawn.y, getNextMino(minoCount));
 
 changeGravity(level);
 window.addEventListener('lineClear', (e) => {
