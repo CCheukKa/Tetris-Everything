@@ -1,0 +1,81 @@
+:root {
+    --boardColour: #00000070;
+    --gridLineColour: #ffffff10;
+    --ZColour: #e06363;
+    --LColour: #e0a563;
+    --OColour: #e0d663;
+    --SColour: #83e063;
+    --IColour: #63e0e0;
+    --JColour: #636de0;
+    --TColour: #c063e0;
+}
+
+body {
+    background-color: #000000b0;
+}
+
+#gameContainer {
+    background-color: #00000020;
+}
+
+#gameContainer>svg {
+    outline: #dddddd solid 1vmin;
+}
+
+#holdBoard {
+    background-color: var(--boardColour);
+}
+
+#mainBoard {
+    background-color: var(--boardColour);
+}
+
+#nextBoard {
+    background-color: var(--boardColour);
+}
+
+.gridline {
+    stroke: var(--gridLineColour);
+    stroke-width: 2px;
+}
+
+
+/* Minos */
+
+.mino {
+    stroke: #00000020;
+    stroke-width: 1.2vmin;
+}
+
+.mino.active {
+    outline: #ffffffb0 solid 0.6vmin;
+    outline-offset: -1.4vmin;
+}
+
+.mino.Z {
+    fill: var(--ZColour);
+}
+
+.mino.L {
+    fill: var(--LColour);
+}
+
+.mino.O {
+    fill: var(--OColour);
+}
+
+.mino.S {
+    fill: var(--SColour);
+}
+
+.mino.I {
+    fill: var(--IColour);
+}
+
+.mino.J {
+    fill: var(--JColour);
+}
+
+.mino.T {
+    fill: var(--TColour);
+}
