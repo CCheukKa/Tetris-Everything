@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris Everything</title>
+</head>
+
+<link rel="stylesheet" href="./styles/main.css">
+<link rel="stylesheet" href="./styles/palette.css">
+
+<body>
+    <div id="gameContainer">
+        <canvas id="backgroundCanvas"></canvas>
+        <svg id="holdBoard"></svg>
+        <svg id="mainBoard">
+            <g id="grid"></g>
+            <g id="minoGroup"></g>
+            <g id="activeGroup"></g>
+        </svg>
+        <svg id="nextBoard"></svg>
+    </div>
+
+</body>
+<!-- helper scripts -->
+<script src="./scripts/helpers/debugHelper.js"></script>
+<script src="./scripts/helpers/eventDefiner.js"></script>
+<script src="./scripts/helpers/renderHelper.js"></script>
+<script src="./scripts/helpers/gameHelper.js"></script>
+<script src="./scripts/helpers/rotateHelper.js"></script>
+<!-- scripts -->
+<script src="./scripts/index.js"></script>
+<script src="./scripts/gameMaster.js"></script>
+<script src="./scripts/inputMaster.js"></script>
+<script src="./scripts/renderer.js"></script>
+
+</html>
