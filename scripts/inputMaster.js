@@ -8,9 +8,6 @@ var arrKey = null;
 const dasWorker = new Worker('./scripts/workers/timeout.js');
 const arrWorker = new Worker('./scripts/workers/interval.js');
 
-const dasTime = 117;
-const arrTime = 25;
-const sdf = 25;
 const dasKeys = [97, 99];
 
 function absoluteKeydown(e) {
@@ -53,6 +50,10 @@ function absoluteKeyup(e) {
         arrKey = null;
         arrWorker.postMessage(-1);
     }
+
+    if (e.keyCode == 98) {
+        isSoftDropping = false;
+    }
 }
 
 function input(e) {
@@ -74,6 +75,10 @@ function input(e) {
             break;
         case 99: // right
             move(1);
+            break;
+
+        case 98: // soft drop
+            isSoftDropping = true;
             break;
 
         case 32: // hard drop

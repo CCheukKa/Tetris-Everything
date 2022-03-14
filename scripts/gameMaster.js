@@ -31,15 +31,18 @@ const spawn = new Coordinate(4, 1)
 const gravityWorker = new Worker('./scripts/workers/interval.js')
 var level = 1;
 var linesClearedTotal = 0;
+var isSoftDropping = false;
 
 var nextQueue = [];
 var minoCount = 0;
 var activeMino = new ActiveMino(spawn.x, spawn.y, getNextMino(minoCount));
 
 changeGravity(level);
-window.addEventListener(event_lineClear, () => {
-    linesClearedTotal++;
-    let closetGoal = level * (level + 1) / 2;
+window.addEventListener('lineClear', (e) => {
+    // console.log(e);
+    linesClearedTotal += e.detail;
+    let closetGoal = level * (level + 1) / 2 * 5;
+    console.log(linesClearedTotal, closetGoal);
     if (linesClearedTotal >= closetGoal) {
         level++;
         changeGravity(level);
@@ -67,10 +70,6 @@ function move(direction) {
     return true;
 }
 
-function softDrop() {
-    //TODO:
-}
-
 function hardDrop() {
     let canFall = true;
     while (canFall) {
@@ -88,15 +87,20 @@ function gravity() {
         return true;
     }
 
-    // Drop
-    console.log(`Dropping mino`);
+    lock();
+}
+
+function lock() {
+    console.log(`Locking mino`);
     activeMino.blockList.forEach(block => {
         board.state[block.y][block.x] = activeMino.type;
     });
     activeMino.regenerate(spawn.x, spawn.y);
-    if (lineClear()) {
+    let linesCleared = lineClear();
+    if (linesCleared) {
         console.log(timestampLog(`Line clear`));
-        window.dispatchEvent(event_lineClear);
+
+        window.dispatchEvent(new CustomEvent('lineClear', { detail: linesCleared }));
     }
     window.dispatchEvent(event_updateActiveMino);
     window.dispatchEvent(event_minoChange);

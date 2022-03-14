@@ -259,12 +259,18 @@ function allowMove(direction) {
     return canMove;
 }
 
+var gravityTickCount = 0;
+
 function changeGravity(level) {
     let gravityMS = 1000 * ((0.8 - ((level - 1) * 0.007)) ** (level - 1));
     console.log(`Gravity: ${gravityMS}`);
-    gravityWorker.postMessage(gravityMS);
+    gravityWorker.postMessage(gravityMS / sdf);
     gravityWorker.onmessage = function() {
-        gravity();
+        gravityTickCount++;
+        if (isSoftDropping | gravityTickCount >= sdf) {
+            gravity();
+            gravityTickCount = 0;
+        }
     }
 }
 
@@ -303,5 +309,5 @@ function lineClear() {
         }
     });
 
-    return true;
+    return clearedLines.length;
 }
