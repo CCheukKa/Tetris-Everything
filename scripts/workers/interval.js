@@ -2,10 +2,10 @@ var activeInterval;
 onmessage = function(e) {
     clearInterval(activeInterval);
     if (e.data == -1) { return; }
-    console.log(timestampLog(`Worker started`));
+    // console.log(timestampLog(`Worker started`));
     activeInterval = setInterval(() => {
-        console.log(timestampLog(`Posted interval`));
         postMessage(true);
+        // console.log(timestampLog(`Posted interval`));
     }, e.data);
 }
 

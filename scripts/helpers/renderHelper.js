@@ -1,5 +1,6 @@
 function refresh(board) {
     board.innerHTML = board.innerHTML;
+    console.log(timestampLog(`Refreshed ${board.id}`));
     return true;
 }
 

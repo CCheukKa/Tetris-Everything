@@ -14,10 +14,10 @@ class Coordinate {
 }
 
 class ActiveMino {
-    constructor(centerX, centerY, index = 0, rotation = 0) {
+    constructor(centerX, centerY, type = getNextMino(minoCount), rotation = 0) {
         this.centerX = centerX;
         this.centerY = centerY;
-        this.index = index;
+        this.type = type;
         this.rotation = rotation;
         this.blockList = [];
         this.redefineBlocks();
@@ -28,7 +28,7 @@ class ActiveMino {
 
     redefineBlocks() {
         this.blockList = [];
-        switch (this.index) {
+        switch (this.type) {
             case 1: //Z
                 switch (this.rotation) {
                     case 0:
@@ -228,6 +228,20 @@ class ActiveMino {
                 return false;
         }
     }
+
+    regenerate(centerX, centerY, type = getNextMino(minoCount), rotation = 0) {
+        activeMino = new ActiveMino(centerX, centerY, type, rotation);
+        delete this;
+    }
+}
+
+function getNextMino(count) {
+    if (!nextQueue[count]) {
+        nextQueue = nextQueue.concat(shuffle([1, 2, 3, 4, 5, 6, 7]));
+    }
+    let result = nextQueue[minoCount];
+    minoCount++;
+    return result;
 }
 
 window.addEventListener('updateActiveMino', () => {
@@ -236,11 +250,58 @@ window.addEventListener('updateActiveMino', () => {
 });
 
 function allowMove(direction) {
-    let result = true;
+    let canMove = true;
     activeMino.blockList.forEach(block => {
         if (board.state[block.y][block.x + direction] != 0) {
-            result = false;
+            canMove = false;
         }
     });
-    return result;
+    return canMove;
+}
+
+function changeGravity(level) {
+    let gravityMS = 1000 * ((0.8 - ((level - 1) * 0.007)) ** (level - 1));
+    console.log(`Gravity: ${gravityMS}`);
+    gravityWorker.postMessage(gravityMS);
+    gravityWorker.onmessage = function() {
+        gravity();
+    }
+}
+
+function allowFall() {
+    let canDrop = true;
+    activeMino.blockList.forEach(block => {
+        if (board.state[block.y + 1][block.x] != 0) {
+            canDrop = false;
+            return;
+        }
+    });
+    return canDrop;
+}
+
+function lineClear() {
+    let clearedLines = [];
+
+    // Identify full lines
+    for (let y = 0; y < board.y; y++) {
+        let allFilled = true;
+        for (let x = 0; x < board.state[y].length; x++) {
+            if (board.state[y][x] <= 0) {
+                allFilled = false;
+                continue;
+            }
+        }
+        if (!allFilled) { continue; }
+        clearedLines.push(y);
+    }
+
+    //Shift board
+    clearedLines.forEach(line => {
+        //TODO: very top of the board clear
+        for (let y = line; y > 0; y--) {
+            board.state[y] = board.state[y - 1].concat();
+        }
+    });
+
+    return true;
 }

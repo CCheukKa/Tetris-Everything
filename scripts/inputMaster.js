@@ -23,9 +23,9 @@ function absoluteKeydown(e) {
             dasList[e.keyCode] = true;
             //
             dasWorker.postMessage(dasTime)
-            console.log(timestampLog(`Requested timeout`));
+                // console.log(timestampLog(`Requested timeout`));
             dasWorker.onmessage = function() {
-                console.log(timestampLog(`Received timeout`));
+                // console.log(timestampLog(`Received timeout`));
                 if (dasList[e.keyCode]) {
                     dasList[e.keyCode] = false;
                     arrKey = e.keyCode;
@@ -76,6 +76,10 @@ function input(e) {
             move(1);
             break;
 
+        case 32: // hard drop
+            hardDrop();
+            break;
+
         default:
             return false;
     }
@@ -85,14 +89,14 @@ function input(e) {
 function arr(e) {
     arrKey = e.keyCode;
     arrWorker.postMessage(arrTime);
-    console.log(timestampLog(`Requested interval`));
+    // console.log(timestampLog(`Requested interval`));
     arrWorker.onmessage = function() {
-        console.log(timestampLog(`Received interval`));
-        if (keyDownList[arrKey]) {
-            input({ detail: { keyCode: arrKey } });
-        } else {
-            arrWorker.postMessage(-1);
+            // console.log(timestampLog(`Received interval`));
+            if (keyDownList[arrKey]) {
+                input({ detail: { keyCode: arrKey } });
+            } else {
+                arrWorker.postMessage(-1);
+            }
         }
-    }
-    console.log(timestampLog(`Returning arr()`));
+        // console.log(timestampLog(`Returning arr()`));
 }

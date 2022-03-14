@@ -2,10 +2,10 @@ var activeTimeout;
 onmessage = function(e) {
     clearTimeout(activeTimeout);
     if (e.data == -1) { return; }
-    console.log(timestampLog(`Worker started`));
+    // console.log(timestampLog(`Worker started`));
     activeTimeout = setTimeout(() => {
-        console.log(timestampLog(`Posted timeout`));
         postMessage(true);
+        // console.log(timestampLog(`Posted timeout`));
     }, e.data);
 }
 

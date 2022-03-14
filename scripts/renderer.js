@@ -31,9 +31,9 @@ function redrawMinos() {
     mainBoard.minoGroup.innerHTML = '';
     for (let y = 0; y < 20; y++) {
         for (let x = 0; x < 10; x++) {
-            let minoIndex = board.state[y][x];
-            if (minoIndex) {
-                drawRectPercent(mainBoard.minoGroup, 10 * x, 5 * y, 10, 5, `mino ${minoName[minoIndex]}`, '', cornerRadius, cornerRadius);
+            let minoType = board.state[y][x];
+            if (minoType) {
+                drawRectPercent(mainBoard.minoGroup, 10 * x, 5 * y, 10, 5, `mino ${minoName[minoType]}`, '', cornerRadius, cornerRadius);
             }
         }
     }
@@ -43,7 +43,7 @@ function redrawMinos() {
 function redrawActive() {
     mainBoard.activeGroup.innerHTML = '';
     activeMino.blockList.forEach(block => {
-        drawRectPercent(mainBoard.activeGroup, 10 * block.x, 5 * block.y, 10, 5, `mino ${minoName[activeMino.index]} active`, '', cornerRadius, cornerRadius);
+        drawRectPercent(mainBoard.activeGroup, 10 * block.x, 5 * block.y, 10, 5, `mino ${minoName[activeMino.type]} active`, '', cornerRadius, cornerRadius);
     });
     refresh(mainBoard.activeGroup);
 }
