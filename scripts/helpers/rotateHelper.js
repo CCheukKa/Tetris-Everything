@@ -1,43 +1,37 @@
+const srsTable = [null, chartZ, chartL, chartO, chartS, chartI, chartJ, chartT];
+// srsTable[type][direction][rotation][offset]
+
 function SRS(direction) {
-    //! Temporary
-    if (direction == 0) {
-        return new Mino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 1) % 4);
-    }
-    if (direction == 1) {
-        return new Mino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 3) % 4);
-    }
-    if (direction == 2) {
-        return new Mino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 2) % 4);
-    }
-    //
-    switch (activeMino.type) {
-        case 1: //Z
-            return rotateZ(direction);
-        case 2: //L
-            return rotateL(direction);
-        case 3: //O
-            return rotateO(direction);
-        case 4: //S
-            return rotateS(direction);
-        case 5: //I
-            return rotateI(direction);
-        case 6: //J
-            return rotateJ(direction);
-        case 7: //T
-            return rotateT(direction);
+    let newRotation;
+    switch (direction) {
+        case 0:
+            newRotation = (activeMino.rotation + 1) % 4;
+            break;
+        case 1:
+            newRotation = (activeMino.rotation + 3) % 4;
+            break;
+        case 2:
+            newRotation = (activeMino.rotation + 2) % 4;
+            break;
         default:
             return false;
     }
-}
+    //
 
-function rotateZ(direction) {
-    if (direction == 0) {
-        return new Mino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 1) % 4);
+    let offsetTable = srsTable[activeMino.type][direction][activeMino.rotation];
+    for (let i = 0; i < offsetTable.length; i++) {
+        let offset = offsetTable[i];
+        let testMino = new Mino(activeMino.centerX + offset.x, activeMino.centerY + offset.y, activeMino.type, newRotation);
+        let canRotate = true;
+        testMino.blockList.forEach(block => {
+            if (board.state[block.y][block.x] != 0) {
+                canRotate = false;
+                return;
+            }
+        });
+        if (canRotate) {
+            return testMino;
+        }
     }
-    if (direction == 1) {
-        return new Mino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 3) % 4);
-    }
-    if (direction == 2) {
-        return new Mino(activeMino.centerX, activeMino.centerY, activeMino.type, (activeMino.rotation + 2) % 4);
-    }
+
 }
