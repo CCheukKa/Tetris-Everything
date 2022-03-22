@@ -262,7 +262,7 @@ var gravityTickCount = 0;
 
 function changeGravity(level) {
     let gravityMS = 1000 * ((0.8 - ((level - 1) * 0.007)) ** (level - 1));
-    console.log(`Gravity: ${gravityMS}`);
+    console.log(`Gravity: ${gravityMS}ms`);
     gravityWorker.postMessage(gravityMS / sdf);
     gravityWorker.onmessage = function() {
         gravityTickCount++;
